@@ -3,7 +3,7 @@ module MDTool
     Location = if OS.windows?
                  '"C:\\Program Files (x86)\\MonoDevelop\\bin\\mdtool.exe"'
                else
-                 "/Applications/MonoDevelop.app/Contents/MacOS/mdtool"
+                 ["Xamarin Studio", "MonoDevelop"].map { |ide| "/Applications/#{ide}.app/Contents/MacOS/mdtool" }.detect { |file| File.exists? file }
                end
 
     def build(solution_file, opts = {})
