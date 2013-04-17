@@ -119,10 +119,16 @@ END
         # Update directory timestamp since we changed its contents,
         # so it is newer than the files that went into the package.
         # Otherwise, package installation task will be triggered unnecessarily on subsequent runs
-        system "touch '#{directory}/#{package_dir package}'" 
-        system "touch '#{directory}'" 
+        update_dir_timestamp "#{directory}/#{package_dir package}"
+        update_dir_timestamp directory
         FileUtils.cp_r Dir.glob("#{directory}/#{package_dir package}/content/*"), "#{root}/."
       end
+    end
+
+    private
+
+    def update_dir_timestamp(dir)
+        system "touch '#{dir}'" if File.directory? dir
     end
   end
 end
