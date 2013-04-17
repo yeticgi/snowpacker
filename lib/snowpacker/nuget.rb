@@ -128,7 +128,7 @@ END
     private
 
     def update_dir_timestamp(dir)
-        system "touch '#{dir}'" if File.directory? dir
+      system "touch '#{dir}'" if File.directory? dir
     end
   end
 end
