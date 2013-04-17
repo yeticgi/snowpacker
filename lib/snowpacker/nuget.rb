@@ -6,7 +6,7 @@ module NuGet
                  "#{Dir.home}/NuGet.exe"
                end
     Config = "#{Dir.home}/.config/NuGet/NuGet.config"
-    AddIn = ["XamarinStudio-4.0", "MonoDevelop-3.0"].map { |ide| Dir.glob("#{Dir.home}/Library/Application Support/#{ide}/LocalInstall/Addins/MonoDevelop.PackageManagement.0.*").first }.detect { |dir| Dir.exists? dir }
+    AddIn = ["XamarinStudio-4.0", "MonoDevelop-3.0"].map { |ide| Dir.glob("#{Dir.home}/Library/Application Support/#{ide}/LocalInstall/Addins/MonoDevelop.PackageManagement.0.*").first }.compact.detect { |dir| Dir.exists? dir }
 
 	  def pack(nuspec, opts = {})
       if OS.windows?
